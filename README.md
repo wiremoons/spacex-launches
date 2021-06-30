@@ -1,4 +1,4 @@
-[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE) ![sxl](https://github.com/wiremoons/spacex-launches/workflows/sxl/badge.svg?branch=main) 
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE) [![sxl](https://github.com/wiremoons/spacex-launches/actions/workflows/sxl-build-nim.yml/badge.svg?branch=main)](https://github.com/wiremoons/spacex-launches/actions/workflows/sxl-build-nim.yml)
 
 # spacex-launches (sxl)
 Command line program called `sxl` to display the last and the next SpaceX launches.
