@@ -3,12 +3,12 @@
 name: sxl
 
 # Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
+# events but only for the main branch
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 #  pull_request:
-#    branches: [ master ]
+#    branches: [ main ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -32,7 +32,7 @@ jobs:
       run: |
         echo "Installing Nim language and dependencies..."
         sudo apt -y install build-essential openssl git curl
-        curl https://raw.githubusercontent.com/wiremoons/nim-misc/master/nim-install.sh -o nim-install.sh
+        curl https://raw.githubusercontent.com/wiremoons/nim-misc/main/nim-install.sh -o nim-install.sh
         chmod 755 ./nim-install.sh
         ./nim-install.sh
         echo "Installed version of Nim and Nimble are:"
@@ -64,7 +64,7 @@ jobs:
 
     # Saves built file as a release.
     #- name: Upload artifact
-    #  uses: actions/upload-artifact@master
+    #  uses: actions/upload-artifact@main
     #  with:
     #    name: release
     #    path: bin
