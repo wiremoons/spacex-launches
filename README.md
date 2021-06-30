@@ -25,7 +25,13 @@ Payload Description:
 Payload is: GPS III SV05 (Satellite) for customer(s): 'USAF'. Payload manufactured by: 'Lockheed Martin'
 
 Flight Description: 
-SpaceX's fourth GPS III launch will use the first stage from the previous GPS mission. This will be the first time a National Security Space Launch has flown on a flight proven booster. Falcon 9 will launch from SLC-40, Cape Canaveral and the booster will land downrange on a drone ship. GPS III is the third generation of the U.S. Space Force's NAVSTAR Global Positioning System satellites, developed by Lockheed Martin. The GPS III constellation will feature a cross-linked command and control architecture, allowing the entire GPS constellation to be updated simultaneously from a single ground station. A new spot beam capability for enhanced military coverage and increased resistance to hostile jamming will be incorporated.
+SpaceX's fourth GPS III launch will use the first stage from the previous GPS mission. This will be the first 
+time a National Security Space Launch has flown on a flight proven booster. Falcon 9 will launch from SLC-40, 
+Cape Canaveral and the booster will land downrange on a drone ship. GPS III is the third generation of the U.S.
+Space Force's NAVSTAR Global Positioning System satellites, developed by Lockheed Martin. The GPS III constellation
+will feature a cross-linked command and control architecture, allowing the entire GPS constellation to be updated
+simultaneously from a single ground station. A new spot beam capability for enhanced military coverage and increased
+resistance to hostile jamming will be incorporated.
 
 Next Scheduled SpaceX Launch 🚀
 
@@ -38,7 +44,11 @@ Payload Description:
 Payload is: Transporter-2 (Satellite) for customer(s): 'UNKNOWN'. Payload manufactured by: 'UNKNOWN'
 
 Flight Description: 
-Falcon 9 launches to sun-synchronous polar orbit from Florida as part of SpaceX's Rideshare program dedicated to smallsat customers. The mission lifts off from SLC-40, Cape Canaveral on a southward azimuth and performs a dogleg maneuver. The booster for this mission is expected to return to LZ-1 based on FCC communications filings. This rideshare takes approximately 90 satellites and hosted payloads into orbit on a variety of deployers including three free-flying spacecraft which dispense their customers' satellites after separation from the SpaceX stack.
+Falcon 9 launches to sun-synchronous polar orbit from Florida as part of SpaceX's Rideshare program dedicated to
+smallsat customers. The mission lifts off from SLC-40, Cape Canaveral on a southward azimuth and performs a dogleg
+maneuver. The booster for this mission is expected to return to LZ-1 based on FCC communications filings. This
+rideshare takes approximately 90 satellites and hosted payloads into orbit on a variety of deployers including three
+free-flying spacecraft which dispense their customers' satellites after separation from the SpaceX stack.
 ```
 
 ## Development Information
