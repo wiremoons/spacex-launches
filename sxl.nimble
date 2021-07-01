@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.1"
+version       = "1.0.0"
 author        = "Simon Rowe"
 description   = "Command line tool to retrieve the last and next SpaceX launches"
 license       = "MIT"
@@ -10,7 +10,7 @@ binDir        = "bin"
 
 # Dependencies
 
-requires "nim >= 1.0.2"
+requires "nim >= 1.4.2"
 
 # Tasks
 
