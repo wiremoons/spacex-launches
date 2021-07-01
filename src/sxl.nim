@@ -8,10 +8,10 @@
 # nim c -r -d:ssl .\sxl.nim
 
 # import the required Nim standard library modules
-import httpclient, json, strformat, strutils, options, times
+import httpclient, json, strformat, strutils, options, times, os, terminal
 
 # import our own modules from this apps source code repo
-import types, dbgUtils
+import types, dbgUtils, version, help
 
 proc returnWebSiteData*(webUrl: string): string =
   ##
@@ -360,19 +360,48 @@ Flight Description:
 {ll.details}"""
 
 
+proc progressUpdate(message:string) =
+  eraseLine(stdout)
+  write(stdout, message)
+  flushFile(stdout)
+
 ###############################################################################
 # MAIN HERE
 ###############################################################################
 
-let LatestLaunchUrl = r"https://api.spacexdata.com/v4/launches/latest"
-let rawLatesLaunchData = returnWebSiteData(LatestLaunchUrl)
-let jsonDataLatestLaunch = returnParsedJson(rawLatesLaunchData)
-let LatestLaunchOutput = extractLatestLaunch(jsonDataLatestLaunch)
+# check for command line options use
+let args = commandLineParams()
+if paramCount() > 0:
+  case args[0]
+  of "-h", "--help":
+    showHelp()
+  of "-v", "--version":
+    showVersion()
+  else:
+    echo "Unknown command line parameter given - see options below:"
+    showHelp()
 
+progressUpdate "Obtaining latest launch data..."
+let LatestLaunchUrl = r"https://api.spacexdata.com/v4/launches/latest"
+progressUpdate "Extracting JSON from web site response..."
+let rawLatesLaunchData = returnWebSiteData(LatestLaunchUrl)
+progressUpdate "Parsing JSON to obtain data required..."
+let jsonDataLatestLaunch = returnParsedJson(rawLatesLaunchData)
+progressUpdate "Formatting information for display..."
+let LatestLaunchOutput = extractLatestLaunch(jsonDataLatestLaunch)
+progressUpdate "Completed latest launch data retrieval."
+
+progressUpdate "Obtaining next launch data..."
 let NextLaunchUrl = r"https://api.spacexdata.com/v4/launches/next"
+progressUpdate "Extracting JSON from web site response..."
 let rawNextLaunchData = returnWebSiteData(NextLaunchUrl)
+progressUpdate "Parsing JSON to obtain data required..."
 let jsonDataNextLaunch = returnParsedJson(rawNextLaunchData)
+progressUpdate "Formatting information for display..."
 let NextLaunchOutput = extractNextLaunch(jsonDataNextLaunch)
+progressUpdate "Completed next launch data retrieval."
+eraseLine(stdout)
+flushFile(stdout)
 
 echo "\nSpaceX Rocket Launch Information"
 echo "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯"
