@@ -381,25 +381,25 @@ if paramCount() > 0:
     echo "Unknown command line parameter given - see options below:"
     showHelp()
 
-progressUpdate "Obtaining latest launch data..."
+progressUpdate "Last Launch: Obtaining latest launch data..."
 let LatestLaunchUrl = r"https://api.spacexdata.com/v4/launches/latest"
-progressUpdate "Extracting JSON from web site response..."
+progressUpdate "Last Launch: Extracting JSON from web site response..."
 let rawLatesLaunchData = returnWebSiteData(LatestLaunchUrl)
-progressUpdate "Parsing JSON to obtain data required..."
+progressUpdate "Last Launch: Parsing JSON to obtain data required..."
 let jsonDataLatestLaunch = returnParsedJson(rawLatesLaunchData)
-progressUpdate "Formatting information for display..."
+progressUpdate "Last Launch: Formatting information for display..."
 let LatestLaunchOutput = extractLatestLaunch(jsonDataLatestLaunch)
-progressUpdate "Completed latest launch data retrieval."
+progressUpdate "Last Launch: Completed latest launch data retrieval."
 
-progressUpdate "Obtaining next launch data..."
+progressUpdate "Next Launch: Obtaining next launch data..."
 let NextLaunchUrl = r"https://api.spacexdata.com/v4/launches/next"
-progressUpdate "Extracting JSON from web site response..."
+progressUpdate "Next Launch: Extracting JSON from web site response..."
 let rawNextLaunchData = returnWebSiteData(NextLaunchUrl)
-progressUpdate "Parsing JSON to obtain data required..."
+progressUpdate "Next Launch: Parsing JSON to obtain data required..."
 let jsonDataNextLaunch = returnParsedJson(rawNextLaunchData)
-progressUpdate "Formatting information for display..."
+progressUpdate "Next Launch: Formatting information for display..."
 let NextLaunchOutput = extractNextLaunch(jsonDataNextLaunch)
-progressUpdate "Completed next launch data retrieval."
+progressUpdate "Next Launch: Completed next launch data retrieval."
 eraseLine(stdout)
 flushFile(stdout)
 
