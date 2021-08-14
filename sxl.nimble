@@ -1,6 +1,6 @@
 # Package
 
-version       = "1.0.1"
+version       = "1.1.0"
 author        = "Simon Rowe"
 description   = "Command line tool to retrieve the last and next SpaceX launches"
 license       = "MIT"
