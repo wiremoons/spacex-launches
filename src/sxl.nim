@@ -8,7 +8,7 @@
 # nim c -r -d:ssl .\sxl.nim
 
 # import the required Nim standard library modules
-import httpclient, json, strformat, strutils, options, times, os, terminal, threadpool
+import httpclient, json, strformat, strutils, options, times, os, terminal, threadpool, locks
 
 # import our own modules from this apps source code repo
 import types, dbgUtils, version, help
@@ -365,29 +365,25 @@ proc progressUpdate(message:string) =
   write(stdout, message)
   flushFile(stdout)
 
-proc lastLaunchCollate() : string =
-  progressUpdate "Last Launch: Obtaining latest launch data..."
+proc lastLaunchCollate(lock: ptr Lock) =
   let LatestLaunchUrl = r"https://api.spacexdata.com/v4/launches/latest"
-  progressUpdate "Last Launch: Extracting JSON from web site response..."
   let rawLatesLaunchData = returnWebSiteData(LatestLaunchUrl)
-  progressUpdate "Last Launch: Parsing JSON to obtain data required..."
   let jsonDataLatestLaunch = returnParsedJson(rawLatesLaunchData)
-  progressUpdate "Last Launch: Formatting information for display..."
   let LatestLaunchOutput = extractLatestLaunch(jsonDataLatestLaunch)
-  progressUpdate "Last Launch: Completed latest launch data retrieval."
-  result = LatestLaunchOutput
+  acquire lock[]
+  echo LatestLaunchOutput
+  echo ""
+  release lock[]
 
-proc nextLaunchCollate(): string =
-  progressUpdate "Next Launch: Obtaining next launch data..."
+proc nextLaunchCollate(lock: ptr Lock) =
   let NextLaunchUrl = r"https://api.spacexdata.com/v4/launches/next"
-  progressUpdate "Next Launch: Extracting JSON from web site response..."
   let rawNextLaunchData = returnWebSiteData(NextLaunchUrl)
-  progressUpdate "Next Launch: Parsing JSON to obtain data required..."
   let jsonDataNextLaunch = returnParsedJson(rawNextLaunchData)
-  progressUpdate "Next Launch: Formatting information for display..."
   let NextLaunchOutput = extractNextLaunch(jsonDataNextLaunch)
-  progressUpdate "Next Launch: Completed next launch data retrieval."
-  result = NextLaunchOutput
+  acquire lock[]
+  echo NextLaunchOutput
+  echo ""
+  release lock[]
 
 ###############################################################################
 # MAIN HERE
@@ -405,16 +401,13 @@ if paramCount() > 0:
     echo "Unknown command line parameter given - see options below:"
     showHelp()
 
-
-let NextLaunchOutput = (^spawn nextLaunchCollate())
-let LatestLaunchOutput = (^spawn lastLaunchCollate())
-#sync()
-
-eraseLine(stdout)
-flushFile(stdout)
+var lock: Lock
+initLock lock
 
 echo "\nSpaceX Rocket Launch Information"
 echo "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯"
-echo LatestLaunchOutput
-echo NextLaunchOutput
+spawn nextLaunchCollate(lock.addr)
+spawn lastLaunchCollate(lock.addr)
+sync()
+deinitLock lock
 echo ""
