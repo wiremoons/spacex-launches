@@ -4,8 +4,11 @@
 ## MIT License
 ## Copyright (c) 2021 Simon Rowe
 ##
+## To view build options run:
+##  nimble tasks
 
-# nim c -r -d:ssl .\sxl.nim
+# TODO : add proxy detection for https requests
+# TODO : add option to obtain launches for next or last only
 
 # import the required Nim standard library modules
 import httpclient, json, strformat, strutils, options, times, os, terminal, threadpool, locks
